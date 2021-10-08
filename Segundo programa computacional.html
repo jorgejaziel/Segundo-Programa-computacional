@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+	<title>Programa computacional</title>
+</head>
+<body>
+	<div class="contenedor">
+		<div class="card">
+			<div class="texto">
+				<h1>
+					Programa computacional
+				</h1>
+				<h2>Validar si la cadena es valida</h2>
+				<h4>Nombre: Jorge Jaziel Carreón Guajardo <br>Matrícula: 1734228</h4>
+				<form action="" >
+					<input id="InputCadena" type="text" placeholder="Escribe la cadena que quieres verificar:">
+					<button type="button" onclick="verificarCadena()" >
+						Validar Cadena
+					</button>
+				</form>
+				<h3 id="cadenaValida" class="cadenaValida" style="display: none;">Cadena Valida</h3>
+				<h3 id="cadenaInvalida" class="cadenaInvalida" style="display: none;">Cadena invalida, intenta con otra</h3>
+			</div>
+			<div class="animacion">
+				<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+				<lottie-player src="https://assets7.lottiefiles.com/packages/lf20_bniew9j6.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+			</div>
+		</div>			
+	</div>
+</body>
+<script>
+	w = 'cg';
+	i = '1734228'
+	wI = 'gc';
+	j = 'jorge';
+	aux = 0;
+
+	const verificarCadena = () => {
+		const input = document.getElementById("InputCadena");
+		const value = input.value;
+		var validador = 0;
+		if(value.includes(i)){  
+			if(value[7] == w[0] && value.substr(0,7) == i){
+				validador++;
+			}
+			else {
+				msg = 'Error, tiene que iniciar con tu matricula.'
+			}
+		}
+		var indices = [];
+		var idx = value.indexOf(w);
+			while (idx != -1) {
+				if( value.indexOf(w, idx + 1) - idx > 2){
+					indices.push(idx);
+					var aux = idx;
+					idx = -1;
+				}else {
+					indices.push(idx);
+					idx = value.indexOf(w, idx + 1);
+			}
+		}
+		var validarN =  indices.length;
+		aux = indices[indices.length-1];
+		if( value[indices[indices.length - 1] + 2 ] == 1 && value[indices[indices.length - 1] + 9 ] == 'g') {
+			validador++;
+		}
+		else{
+			msg = 'Error, hay un problema con la w^n, revisa la cadena.'
+		}
+		var indices = [];
+		var idx = value.indexOf(wI,aux+2);
+			while (idx != -1) {
+				if( value.indexOf(wI, idx + 1) - idx > 2){
+					indices.push(idx);
+					idx = -1;
+				}else {
+					indices.push(idx);
+					idx = value.indexOf(wI, idx + 1);
+			}
+		}
+		var validarNs =  indices.length;
+		if(validarNs / validarN == 2){
+			validador++
+		}
+		else{
+			msg = "Revisa que hayas escrito bien la cadena, recuerda escribir bien tu w elevado a la n"
+		}
+		if( indices.length % 2 == 0) {
+			if( value[indices[indices.length - 1] + 2 ] == 'j' && value[indices[indices.length - 1] + 11 ] == 'e') {
+				validador++;
+			}
+		}
+		else{
+			if(indices.length == 1){
+				validador++;
+			}
+			msg = 'Error, hay un problema con la w inversa, recuerda que tiene que ser 2n.'
+		}
+		
+		var indicesAux = [];
+		var idx = value.indexOf(i);
+			while (idx != -1) {
+				indicesAux.push(idx);
+				idx = value.indexOf(i, idx + 1);
+		}
+		if(indicesAux.length > 2){
+			msg = 'Error, mas de 2 matriculas, recuerda que solo puede haber una al inicio y una entre de w^n y w inversa'
+		}
+		var arregloDeJotas = [];
+		var idx = value.indexOf(j);
+			while (idx != -1) {
+				arregloDeJotas.push(idx);
+				idx = value.indexOf(j, idx + 1);
+		}
+		if(arregloDeJotas.length != 2){
+			msg = 'Error, mas de 2 nombres, recuerda que solo puedes poner en dos ocasiones tu nombre'
+		}
+		if (value.endsWith(j)){
+			validador++;
+		}
+		else{
+			msg = 'Error, la cadena no termina con tu nombre, recuerda que debe terminar con ' + j;
+		}
+		if( value == ""){
+			msg = "Ingrese un valor"
+		}
+		if(validador==5){
+			var elem = document.getElementById('cadenaValida');
+			elem.style.display = "block";
+			var elem = document.getElementById('cadenaInvalida');
+			elem.style.display = "none";
+		}
+		else{
+			alert(msg)
+			var elem = document.getElementById('cadenaInvalida');
+			elem.style.display = "block";
+			var elem = document.getElementById('cadenaValida');
+			elem.style.display = "none";
+		}
+	}
+</script>
+<style>
+	body{
+		margin: 0;
+		margin-right: 0;
+		padding: 0;
+		background-image: url("./HillsandMountains-day.gif");
+		background-repeat: no-repeat;
+		background-size:cover;
+		background-attachment: fixed;
+		background-color: rgba(199, 12, 12, 0.075);
+	}
+	.contenedor{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.card{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-top: 13%;
+		background-color: rgba(240, 248, 255, 0.507);
+		padding: 60px;
+		border-radius: 20px;
+		box-shadow: 10px 5px 5px black;
+	}
+	.animacion p{
+		text-align: center;
+	}
+	.texto h1{
+		text-align: center;
+		margin: auto;
+		margin-bottom: 50px;
+		color: rgba(0, 0, 0, 0.712);
+		font-family: 'Fjalla One', sans-serif;
+	}
+	.texto h2, h4,h3{
+		font-family: 'Fjalla One', sans-serif;
+		margin-bottom: 30px;
+	}
+	.cadenaInvalida, .cadenaValida{
+		display:inline-flex;
+		text-align: center;
+		margin-top: 40px;
+	}
+	.texto form{
+		display: flex;
+		flex-direction: column;
+		height: 100px;
+    justify-content: space-evenly;
+	}
+	input{
+		border-radius: 30px;
+		border: 0;
+		padding: 10px;
+		color: black;
+		font-size: 16px;
+	}
+	button{
+		background-color: rgba(79, 77, 233, 0.671);
+		border-radius: 30px;
+		color: white;
+		padding: 10px;
+		margin-top: 30px;
+		font-size: 14px;
+		font-family: 'Fjalla One', sans-serif;
+	}
+</style>
+</html>
